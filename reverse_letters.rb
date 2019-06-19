@@ -12,5 +12,3 @@ def reverse_letters(word)
     reversed_letters
     
 end
-
-print reverse_letters("happy")
