@@ -7,28 +7,28 @@ def find_anagram(word)
     # Create 'dictionary' by reading word list into array
     dictionary = File.open('wordlist').read.split(/\n/)
 
-    # Sort each word in the dictionary alphabetically (not complete)
+    # Sort each word in the dictionary alphabetically and save to a new array
     alph_dictionary = []
-    dictionary.each do |a|
-        alph_dictionary.push(a.chars.sort.join)
+    dictionary.each do |words|
+        alph_dictionary.push(words.chars.sort.join)
     end
 
-    # Use a loop to check each dictionary entry for a match
-    alph_dictionary.each do |x|
-        # If the alphabetized dictionary word matches our alphabetized word
-        if x == word.chars.sort.join
-            # Find the index
-            i = alph_dictionary.index(x)
-            # Look up the match in the original dictionary
-            r = dictionary[i]
-            # Add to result
-            result.push(r)
+    # Get the index of each of the word matches
+    matches_index = []
+    alph_dictionary.each_with_index do |alph_word, index|
+        if alph_word == word.chars.sort.join
+            matches_index.push(index)
         end
     end
-    
+
+    # Find words in the alphabetized dictionary that match our alphabetized word's index
+    for i in matches_index
+        result.push(dictionary[i])
+    end
+
     # Return anagrams
     print result
 
 end
 
-find_anagram("tap")
+find_anagram("cat")
